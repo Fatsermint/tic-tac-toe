@@ -1,0 +1,150 @@
+[gd_scene load_steps=7 format=3 uid="uid://b0b3535a8dvu8"]
+
+[ext_resource type="Script" uid="uid://b022qqr1k6igs" path="res://Scenes/home.gd" id="1_12ycv"]
+[ext_resource type="PackedScene" uid="uid://pb0qjsqdhndb" path="res://Scenes/grid.tscn" id="1_uq2cn"]
+[ext_resource type="PackedScene" uid="uid://085iyf8trsv7" path="res://Scenes/X.tscn" id="2_ibywg"]
+[ext_resource type="PackedScene" uid="uid://dgxb8uh5xbeah" path="res://Scenes/o.tscn" id="3_12ycv"]
+
+[sub_resource type="Animation" id="Animation_12ycv"]
+resource_name = "Idle"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_llnbm"]
+_data = {
+&"Idle": SubResource("Animation_12ycv")
+}
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_12ycv")
+
+[node name="Grid" parent="." instance=ExtResource("1_uq2cn")]
+layout_mode = 0
+mouse_default_cursor_shape = 4
+
+[node name="2" type="Button" parent="Grid"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 497.0
+offset_top = 59.0
+offset_right = 505.0
+offset_bottom = 67.0
+scale = Vector2(20, 20)
+
+[node name="3" type="Button" parent="Grid"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 687.0
+offset_top = 59.0
+offset_right = 695.0
+offset_bottom = 67.0
+scale = Vector2(20, 20)
+
+[node name="4" type="Button" parent="Grid"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 303.0
+offset_top = 251.0
+offset_right = 311.0
+offset_bottom = 259.0
+scale = Vector2(20, 20)
+
+[node name="5" type="Button" parent="Grid"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 497.0
+offset_top = 251.0
+offset_right = 505.0
+offset_bottom = 259.0
+scale = Vector2(20, 20)
+
+[node name="6" type="Button" parent="Grid"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 687.0
+offset_top = 251.0
+offset_right = 695.0
+offset_bottom = 259.0
+scale = Vector2(20, 20)
+
+[node name="7" type="Button" parent="Grid"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 306.0001
+offset_top = 441.00003
+offset_right = 314.0001
+offset_bottom = 449.00003
+scale = Vector2(20, 20)
+
+[node name="8" type="Button" parent="Grid"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 499.0
+offset_top = 441.00003
+offset_right = 507.0
+offset_bottom = 449.00003
+scale = Vector2(20, 20)
+
+[node name="9" type="Button" parent="Grid"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 688.0
+offset_top = 441.00003
+offset_right = 696.0
+offset_bottom = 449.00003
+scale = Vector2(20, 20)
+
+[node name="1" type="Button" parent="Grid"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 307.00003
+offset_top = 59.000004
+offset_right = 315.00003
+offset_bottom = 67.0
+scale = Vector2(20, 20)
+
+[node name="X" parent="." instance=ExtResource("2_ibywg")]
+modulate = Color(1, 1, 1, 0.5019608)
+layout_mode = 1
+offset_left = -1586.0
+offset_top = 45.0
+offset_right = -1586.0
+offset_bottom = 45.0
+scale = Vector2(0.05, 0.05)
+mouse_filter = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="X"]
+libraries = {
+&"": SubResource("AnimationLibrary_llnbm")
+}
+
+[node name="O" parent="." instance=ExtResource("3_12ycv")]
+layout_mode = 1
+offset_left = -1187.0
+offset_top = -38.0
+offset_right = -1187.0
+offset_bottom = -38.0
+mouse_filter = 2
+
+[node name="Phanthom" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[connection signal="mouse_entered" from="Grid/2" to="." method="_on_2_mouse_entered"]
+[connection signal="mouse_entered" from="Grid/3" to="." method="_on_3_mouse_entered"]
+[connection signal="mouse_entered" from="Grid/4" to="." method="_on_4_mouse_entered"]
+[connection signal="mouse_entered" from="Grid/5" to="." method="_on_5_mouse_entered"]
+[connection signal="mouse_entered" from="Grid/6" to="." method="_on_6_mouse_entered"]
+[connection signal="mouse_entered" from="Grid/7" to="." method="_on_7_mouse_entered"]
+[connection signal="mouse_entered" from="Grid/8" to="." method="_on_8_mouse_entered"]
+[connection signal="mouse_entered" from="Grid/9" to="." method="_on_9_mouse_entered"]
+[connection signal="mouse_entered" from="Grid/1" to="." method="_on_1_mouse_entered"]
