@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b0b3535a8dvu8"]
+[gd_scene load_steps=15 format=3 uid="uid://b0b3535a8dvu8"]
 
 [ext_resource type="Script" uid="uid://b022qqr1k6igs" path="res://Scenes/home.gd" id="1_12ycv"]
 [ext_resource type="PackedScene" uid="uid://pb0qjsqdhndb" path="res://Scenes/grid.tscn" id="1_uq2cn"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bvok7362bs0q5" path="res://Scenes/texture_rect.gd" id="6_fhpuh"]
 [ext_resource type="FontFile" uid="uid://b2lkvxapehayl" path="res://images/Lacquer-Regular.ttf" id="7_vkfas"]
 [ext_resource type="Texture2D" uid="uid://ba4cxyxaui3hl" path="res://images/settings.png" id="8_q1yq7"]
+[ext_resource type="Script" uid="uid://c08luf1n2rprl" path="res://Scenes/settings.gd" id="9_cykap"]
 
 [sub_resource type="Animation" id="Animation_12ycv"]
 resource_name = "Idle"
@@ -181,7 +182,6 @@ show_behind_parent = true
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1440.0
-scale = Vector2(0.6, 0.45)
 mouse_filter = 2
 texture = ExtResource("5_llnbm")
 script = ExtResource("6_fhpuh")
@@ -196,11 +196,14 @@ scale = Vector2(0.07, 0.07)
 mouse_filter = 2
 
 [node name="Turn" type="ColorRect" parent="."]
-layout_mode = 0
-offset_left = 687.99994
-offset_top = 38.0
-offset_right = 727.99994
-offset_bottom = 78.000015
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -424.0
+offset_right = -384.0
+offset_bottom = 40.000015
+grow_horizontal = 0
 scale = Vector2(10.6, 3.5199995)
 color = Color(0.32799995, 0.27999997, 1, 0.4745098)
 
@@ -257,14 +260,16 @@ grow_vertical = 2
 wait_time = 2.0
 one_shot = true
 
-[node name="TextureRect2" type="TextureRect" parent="."]
+[node name="Settings" type="TextureRect" parent="."]
+top_level = true
 layout_mode = 0
 offset_right = 512.0
 offset_bottom = 512.0
 scale = Vector2(0.125, 0.125)
 texture = ExtResource("8_q1yq7")
+script = ExtResource("9_cykap")
 
-[node name="Button" type="Button" parent="TextureRect2"]
+[node name="Button" type="Button" parent="Settings"]
 self_modulate = Color(0.0666666, 0, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -273,6 +278,108 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -284.5
+offset_top = -274.5
+offset_right = 284.5
+offset_bottom = 274.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.92790747, 0.92790747)
+color = Color(0, 0.92314893, 1, 0.984)
+
+[node name="Head" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -197.5
+offset_right = 197.5
+offset_bottom = 192.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("7_vkfas")
+theme_override_font_sizes/font_size = 160
+text = "STATS"
+
+[node name="Played" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 14.548863
+offset_top = 170.81445
+offset_right = 632.5489
+offset_bottom = 230.81445
+theme_override_fonts/font = ExtResource("7_vkfas")
+theme_override_font_sizes/font_size = 50
+text = "Games played "
+
+[node name="Win" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 14.548863
+offset_top = 238.70915
+offset_right = 632.5489
+offset_bottom = 298.70917
+theme_override_fonts/font = ExtResource("7_vkfas")
+theme_override_font_sizes/font_size = 50
+text = "Games won"
+
+[node name="Lost" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 14.548863
+offset_top = 311.9923
+offset_right = 632.5489
+offset_bottom = 371.9923
+theme_override_fonts/font = ExtResource("7_vkfas")
+theme_override_font_sizes/font_size = 50
+text = "Games losT"
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -213.91106
+offset_top = 114.008575
+offset_right = -173.91106
+offset_bottom = 154.00858
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(9.928, 3.5)
+mouse_filter = 1
+color = Color(0.37804863, 0.37804863, 0.37804863, 0.80700004)
+
+[node name="Button" type="Button" parent="ColorRect/ColorRect"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Change" type="Label" parent="ColorRect/ColorRect"]
+top_level = true
+layout_mode = 0
+offset_left = 392.0
+offset_top = 446.0
+offset_right = 1010.0
+offset_bottom = 506.0
+scale = Vector2(0.72, 1)
+theme_override_colors/font_color = Color(1, 1, 0.45775273, 1)
+theme_override_fonts/font = ExtResource("7_vkfas")
+theme_override_font_sizes/font_size = 50
+text = "Change backround"
+
+[connection signal="lost" from="." to="Settings" method="_on_control_lost"]
+[connection signal="win" from="." to="Settings" method="_on_control_win"]
 [connection signal="mouse_entered" from="Grid/2" to="." method="_on_2_mouse_entered"]
 [connection signal="pressed" from="Grid/2" to="." method="_on_2_pressed"]
 [connection signal="mouse_entered" from="Grid/3" to="." method="_on_3_mouse_entered"]
@@ -294,3 +401,5 @@ grow_vertical = 2
 [connection signal="animation_finished" from="Turn2/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="Turn2/Button" to="." method="_on_restart_button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="Settings/Button" to="Settings" method="_on_settings_open_button_pressed"]
+[connection signal="pressed" from="ColorRect/ColorRect/Button" to="Settings" method="_on_backround_button_pressed"]

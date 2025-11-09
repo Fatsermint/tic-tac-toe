@@ -2,7 +2,10 @@ extends TextureRect
 
 
 @onready var texture_rect: TextureRect = $"."
-
+var window_ratio: float
+var win
 func _process(delta: float) -> void:
-	texture_rect.size.y = get_window().size.y
-	texture_rect.size.x = get_window().size.x
+	win = get_window()
+	window_ratio = float(win.size.x) / win.size.y if float(win.size.x) > win.size.y else win.size.y / float(win.size.x)
+	texture_rect.scale.x = window_ratio * 0.5
+	texture_rect.scale.y = window_ratio * 0.5

@@ -15,6 +15,9 @@ extends Control
 @onready var o: Control = $O
 const color = Color(1.0, 1.0, 1.0, 0.212)
 const colorPlayer = Color(1.0, 1.0, 1.0, 1.0)
+signal win
+signal lost
+
 var playerTurn = true
 var used = []
 var playerUsed = []
@@ -43,6 +46,10 @@ const winning = [
 	
 ]
 func _process(delta: float) -> void:
+	if used.has(1) and used.has(2) and used.has(3) and used.has(4) and used.has(5) and used.has(6) and used.has(7) and used.has(8) and used.has(9):
+		if not $Turn2/Label.text == "You won!" or not $Turn2/Label.text == "You lost :(":
+			print("DRAW")
+			$Turn2/Label.text = "Draw"
 	if playerTurn == true:
 		turnLabel.text = "Your Turn"
 	else:
@@ -129,6 +136,7 @@ func _process(delta: float) -> void:
 		if combo.all(func(n): return n in playerUsed):
 			if not turnLabel.text == "You won!":
 				turnLabel.text = "You won!"
+				win.emit()
 				$Turn2.visible = true
 				$Turn2.position = Vector2(744, 300)
 
@@ -136,9 +144,11 @@ func _process(delta: float) -> void:
 	for combo in winning:
 		if combo.all(func(n): return n in enemyUsed):
 			if not turnLabel.text == "You won!":
-				turnLabel.text = "You lost :("
-				$Turn2.visible = true
-				$Turn2.position = Vector2(744, 300)
+				if not turnLabel.text == "You lost :(":
+					turnLabel.text = "You lost :("
+					lost.emit()
+					$Turn2.visible = true
+					$Turn2.position = Vector2(744, 300)
 func removeAllDubs() -> void:
 	if _1.get_child_count() >=  0.9:
 		if not 1 in used:
