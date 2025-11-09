@@ -1,9 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://b0b3535a8dvu8"]
+[gd_scene load_steps=10 format=3 uid="uid://b0b3535a8dvu8"]
 
 [ext_resource type="Script" uid="uid://b022qqr1k6igs" path="res://Scenes/home.gd" id="1_12ycv"]
 [ext_resource type="PackedScene" uid="uid://pb0qjsqdhndb" path="res://Scenes/grid.tscn" id="1_uq2cn"]
 [ext_resource type="PackedScene" uid="uid://085iyf8trsv7" path="res://Scenes/X.tscn" id="2_ibywg"]
 [ext_resource type="PackedScene" uid="uid://dgxb8uh5xbeah" path="res://Scenes/o.tscn" id="3_12ycv"]
+[ext_resource type="Texture2D" uid="uid://bxcoh27sefsv2" path="res://images/backround.jpg" id="5_llnbm"]
+[ext_resource type="Script" uid="uid://bvok7362bs0q5" path="res://Scenes/texture_rect.gd" id="6_fhpuh"]
+[ext_resource type="FontFile" uid="uid://b2lkvxapehayl" path="res://images/Lacquer-Regular.ttf" id="7_vkfas"]
 
 [sub_resource type="Animation" id="Animation_12ycv"]
 resource_name = "Idle"
@@ -23,7 +26,18 @@ grow_vertical = 2
 script = ExtResource("1_12ycv")
 
 [node name="Grid" parent="." instance=ExtResource("1_uq2cn")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -806.0
+offset_top = -325.0
+offset_right = 345.0
+offset_bottom = 326.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 1
 mouse_default_cursor_shape = 8
 
@@ -124,23 +138,67 @@ libraries = {
 &"": SubResource("AnimationLibrary_llnbm")
 }
 
+[node name="TextureRect" type="TextureRect" parent="."]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1440.0
+scale = Vector2(0.6, 0.45)
+mouse_filter = 2
+texture = ExtResource("5_llnbm")
+stretch_mode = 2
+script = ExtResource("6_fhpuh")
+
 [node name="O" parent="." instance=ExtResource("3_12ycv")]
 layout_mode = 1
-offset_left = -1187.0
-offset_top = -38.0
-offset_right = -1187.0
-offset_bottom = -38.0
+offset_left = -2480.0
+offset_top = 401.0
+offset_right = -2480.0
+offset_bottom = 401.0
+scale = Vector2(0.07, 0.07)
 mouse_filter = 2
+
+[node name="Turn" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 692.0
+offset_top = 28.000008
+offset_right = 732.0
+offset_bottom = 68.00001
+scale = Vector2(10.6, 3.5199995)
+color = Color(0.32799995, 0.27999997, 1, 0.4745098)
+
+[node name="Label" type="Label" parent="Turn"]
+layout_mode = 0
+offset_left = 0.28301883
+offset_right = 556.2831
+offset_bottom = 138.0
+scale = Vector2(0.07169813, 0.28671333)
+theme_override_fonts/font = ExtResource("7_vkfas")
+theme_override_font_sizes/font_size = 90
+text = "Your turn!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 
 [connection signal="mouse_entered" from="Grid/2" to="." method="_on_2_mouse_entered"]
 [connection signal="pressed" from="Grid/2" to="." method="_on_2_pressed"]
 [connection signal="mouse_entered" from="Grid/3" to="." method="_on_3_mouse_entered"]
 [connection signal="pressed" from="Grid/3" to="." method="_on_3_pressed"]
 [connection signal="mouse_entered" from="Grid/4" to="." method="_on_4_mouse_entered"]
+[connection signal="pressed" from="Grid/4" to="." method="_on_4_pressed"]
 [connection signal="mouse_entered" from="Grid/5" to="." method="_on_5_mouse_entered"]
+[connection signal="pressed" from="Grid/5" to="." method="_on_5_pressed"]
 [connection signal="mouse_entered" from="Grid/6" to="." method="_on_6_mouse_entered"]
+[connection signal="pressed" from="Grid/6" to="." method="_on_6_pressed"]
 [connection signal="mouse_entered" from="Grid/7" to="." method="_on_7_mouse_entered"]
+[connection signal="pressed" from="Grid/7" to="." method="_on_7_pressed"]
 [connection signal="mouse_entered" from="Grid/8" to="." method="_on_8_mouse_entered"]
+[connection signal="pressed" from="Grid/8" to="." method="_on_8_pressed"]
 [connection signal="mouse_entered" from="Grid/9" to="." method="_on_9_mouse_entered"]
+[connection signal="pressed" from="Grid/9" to="." method="_on_9_pressed"]
 [connection signal="mouse_entered" from="Grid/1" to="." method="_on_1_mouse_entered"]
 [connection signal="pressed" from="Grid/1" to="." method="_on_1_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
