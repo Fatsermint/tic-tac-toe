@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b0b3535a8dvu8"]
+[gd_scene load_steps=22 format=3 uid="uid://b0b3535a8dvu8"]
 
 [ext_resource type="Script" uid="uid://b022qqr1k6igs" path="res://Scenes/home.gd" id="1_12ycv"]
 [ext_resource type="PackedScene" uid="uid://pb0qjsqdhndb" path="res://Scenes/grid.tscn" id="1_uq2cn"]
@@ -13,6 +13,44 @@
 [ext_resource type="FontFile" uid="uid://xrwm4p1m8g83" path="res://images/CaveatBrush-Regular.ttf" id="10_gyiet"]
 [ext_resource type="AudioStream" uid="uid://d77d2354558" path="res://sounds/pop.mp3" id="11_gyiet"]
 [ext_resource type="Script" uid="uid://cf6cxgbei1pvt" path="res://Scenes/changesymbols.gd" id="13_jjai4"]
+
+[sub_resource type="Animation" id="Animation_3jwyx"]
+resource_name = "new_animation"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.06999999, 0.06999999, 1), Color(0.287, 1, 0.06999999, 1), Color(0.06999999, 1, 0.79849994, 1), Color(0.06999999, 0.06999999, 1, 1), Color(1, 0.06999999, 0.08549976, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_72mdp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bb1ui"]
+_data = {
+&"RESET": SubResource("Animation_72mdp"),
+&"new_animation": SubResource("Animation_3jwyx")
+}
 
 [sub_resource type="Animation" id="Animation_12ycv"]
 resource_name = "Idle"
@@ -165,6 +203,12 @@ offset_right = 315.00003
 offset_bottom = 67.0
 scale = Vector2(20, 20)
 action_mode = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Grid"]
+libraries = {
+&"": SubResource("AnimationLibrary_bb1ui")
+}
+speed_scale = 0.5
 
 [node name="X" parent="." instance=ExtResource("2_ibywg")]
 modulate = Color(1, 1, 1, 0.5019608)

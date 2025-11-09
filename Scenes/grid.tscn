@@ -23,5 +23,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+modulate = Color(0.23056954, 1, 0.25944513, 1)
 layout_mode = 2
 texture = ExtResource("1_3jwyx")

@@ -185,6 +185,8 @@ func _process(delta: float) -> void:
 		if combo.all(func(n): return n in playerUsed):
 			if finished == false:
 				turnLabel.text = "You won!"
+				$Grid/AnimationPlayer.play("new_animation")
+
 				playerTurn = true
 				win.emit()
 				$Turn2.visible = true
