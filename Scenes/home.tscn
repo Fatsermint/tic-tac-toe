@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b0b3535a8dvu8"]
+[gd_scene load_steps=14 format=3 uid="uid://b0b3535a8dvu8"]
 
 [ext_resource type="Script" uid="uid://b022qqr1k6igs" path="res://Scenes/home.gd" id="1_12ycv"]
 [ext_resource type="PackedScene" uid="uid://pb0qjsqdhndb" path="res://Scenes/grid.tscn" id="1_uq2cn"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bxcoh27sefsv2" path="res://images/backround.jpg" id="5_llnbm"]
 [ext_resource type="Script" uid="uid://bvok7362bs0q5" path="res://Scenes/texture_rect.gd" id="6_fhpuh"]
 [ext_resource type="FontFile" uid="uid://b2lkvxapehayl" path="res://images/Lacquer-Regular.ttf" id="7_vkfas"]
+[ext_resource type="Texture2D" uid="uid://ba4cxyxaui3hl" path="res://images/settings.png" id="8_q1yq7"]
 
 [sub_resource type="Animation" id="Animation_12ycv"]
 resource_name = "Idle"
@@ -14,6 +15,43 @@ resource_name = "Idle"
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_llnbm"]
 _data = {
 &"Idle": SubResource("Animation_12ycv")
+}
+
+[sub_resource type="Animation" id="Animation_8riyq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(744, 45)]
+}
+
+[sub_resource type="Animation" id="Animation_nw1ns"]
+resource_name = "boing"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.35, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(744, 45), Vector2(744, 201), Vector2(744, 170), Vector2(744, 201)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gyiet"]
+_data = {
+&"RESET": SubResource("Animation_8riyq"),
+&"boing": SubResource("Animation_nw1ns")
 }
 
 [node name="Control" type="Control"]
@@ -146,7 +184,6 @@ offset_bottom = 1440.0
 scale = Vector2(0.6, 0.45)
 mouse_filter = 2
 texture = ExtResource("5_llnbm")
-stretch_mode = 2
 script = ExtResource("6_fhpuh")
 
 [node name="O" parent="." instance=ExtResource("3_12ycv")]
@@ -160,10 +197,10 @@ mouse_filter = 2
 
 [node name="Turn" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 692.0
-offset_top = 28.000008
-offset_right = 732.0
-offset_bottom = 68.00001
+offset_left = 687.99994
+offset_top = 38.0
+offset_right = 727.99994
+offset_bottom = 78.000015
 scale = Vector2(10.6, 3.5199995)
 color = Color(0.32799995, 0.27999997, 1, 0.4745098)
 
@@ -179,9 +216,62 @@ text = "Your turn!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Turn2" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 744.0
+offset_top = 45.0
+offset_right = 774.0
+offset_bottom = 75.0
+scale = Vector2(10.6, 3.5199995)
+color = Color(0.32799995, 0.27999997, 1, 0.4745098)
+
+[node name="Label" type="Label" parent="Turn2"]
+layout_mode = 1
+offset_left = 1.0377417
+offset_top = -0.8522707
+offset_right = 389.03775
+offset_bottom = 107.14773
+scale = Vector2(0.07169813, 0.28671333)
+theme_override_fonts/font = ExtResource("7_vkfas")
+theme_override_font_sizes/font_size = 90
+text = "Try again"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Turn2"]
+libraries = {
+&"": SubResource("AnimationLibrary_gyiet")
+}
+
+[node name="Button" type="Button" parent="Turn2"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 512.0
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("8_q1yq7")
+
+[node name="Button" type="Button" parent="TextureRect2"]
+self_modulate = Color(0.0666666, 0, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="mouse_entered" from="Grid/2" to="." method="_on_2_mouse_entered"]
 [connection signal="pressed" from="Grid/2" to="." method="_on_2_pressed"]
@@ -201,4 +291,6 @@ one_shot = true
 [connection signal="pressed" from="Grid/9" to="." method="_on_9_pressed"]
 [connection signal="mouse_entered" from="Grid/1" to="." method="_on_1_mouse_entered"]
 [connection signal="pressed" from="Grid/1" to="." method="_on_1_pressed"]
+[connection signal="animation_finished" from="Turn2/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="pressed" from="Turn2/Button" to="." method="_on_restart_button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

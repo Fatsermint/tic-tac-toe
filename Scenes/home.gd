@@ -15,7 +15,7 @@ extends Control
 @onready var o: Control = $O
 const color = Color(1.0, 1.0, 1.0, 0.212)
 const colorPlayer = Color(1.0, 1.0, 1.0, 1.0)
-var playerTurn = false
+var playerTurn = true
 var used = []
 var playerUsed = []
 var enemyUsed = []
@@ -49,6 +49,7 @@ func _process(delta: float) -> void:
 		turnLabel.text = "Wait.."
 	if playerTurn == false:
 		if timergoing == false:
+			timer.wait_time = randi_range(0.5,2.5)
 			timer.start()
 			timergoing = true
 		if wait == false:
@@ -58,6 +59,7 @@ func _process(delta: float) -> void:
 				print("used already :(")
 				return
 			else:
+				
 				if randomPos == 1:
 					var o1 = o.duplicate()
 					_1.add_child(o1)
@@ -111,6 +113,7 @@ func _process(delta: float) -> void:
 					_8.add_child(o8)
 					o8.position = Vector2(3.625,4.575)
 					used += [8]
+					
 					enemyUsed += [8]
 				if randomPos == 9:
 					print("!!!!!!!!")
@@ -124,11 +127,18 @@ func _process(delta: float) -> void:
 				wait = true
 	for combo in winning:
 		if combo.all(func(n): return n in playerUsed):
-			turnLabel.text = "You won!"
+			if not turnLabel.text == "You won!":
+				turnLabel.text = "You won!"
+				$Turn2.visible = true
+				$Turn2.position = Vector2(744, 300)
+
+
 	for combo in winning:
 		if combo.all(func(n): return n in enemyUsed):
 			if not turnLabel.text == "You won!":
 				turnLabel.text = "You lost :("
+				$Turn2.visible = true
+				$Turn2.position = Vector2(744, 300)
 func removeAllDubs() -> void:
 	if _1.get_child_count() >=  0.9:
 		if not 1 in used:
@@ -296,7 +306,10 @@ func _on_9_pressed() -> void:
 			dub9.modulate = colorPlayer
 			playerTurn = false
 
-
 func _on_timer_timeout() -> void:
 	wait = false
 	timergoing = false
+
+
+func _on_restart_button_pressed() -> void:
+	get_tree().reload_current_scene()
