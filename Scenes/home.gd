@@ -9,7 +9,9 @@ extends Control
 @onready var _8: Button = $"Grid/8"
 @onready var _9: Button = $"Grid/9"
 @onready var turnLabel: Label = $Turn/Label
+@onready var pop: AudioStreamPlayer = $Pop
 @onready var timer: Timer = $Timer
+@onready var label: Label = $Turn/Label
 
 @onready var x: Control = $X
 @onready var o: Control = $O
@@ -17,7 +19,8 @@ const color = Color(1.0, 1.0, 1.0, 0.212)
 const colorPlayer = Color(1.0, 1.0, 1.0, 1.0)
 signal win
 signal lost
-
+signal drawed
+var finished = false
 var playerTurn = true
 var used = []
 var playerUsed = []
@@ -43,30 +46,71 @@ const winning = [
 	[3, 6, 9],# |
 	[1, 5, 9], # /
 	[3, 5, 7]
-	
 ]
+func get_block_move() -> int:
+	for combo in winning:
+		var player_count = 0
+		var empty_spot = null
+		for n in combo:
+			if n in playerUsed:
+				player_count += 1
+			elif not n in used:
+				empty_spot = n
+		if player_count == 2 and empty_spot != null:
+			return empty_spot
+	return -1
+func get_winning_move() -> int:
+	# Checks if the enemy can win in one move and returns that spot
+	for combo in winning:
+		var enemy_count = 0
+		var empty_spot = null
+		for n in combo:
+			if n in enemyUsed:
+				enemy_count += 1
+			elif not n in used:
+				empty_spot = n
+		if enemy_count == 2 and empty_spot != null:
+			return empty_spot
+	return -1
 func _process(delta: float) -> void:
 	if used.has(1) and used.has(2) and used.has(3) and used.has(4) and used.has(5) and used.has(6) and used.has(7) and used.has(8) and used.has(9):
-		if not $Turn2/Label.text == "You won!" or not $Turn2/Label.text == "You lost :(":
-			print("DRAW")
-			$Turn2/Label.text = "Draw"
-	if playerTurn == true:
-		turnLabel.text = "Your Turn"
+		if finished == false:
+			print("DRAW")										#DRAW
+			finished = true
+			label.text = "Draw"
+			
+			drawed.emit()
+			playerTurn = true
+
+			$Turn2.visible = true
+			$Turn2.position = Vector2(744, 300)
+	if playerTurn == true and finished == false:
+		turnLabel.text = "Your Turn" # Tells turn
 	else:
-		turnLabel.text = "Wait.."
+		if finished == false:
+			turnLabel.text = "Wait.."
 	if playerTurn == false:
 		if timergoing == false:
-			timer.wait_time = randi_range(0.5,2.5)
+			pop.play()
+			timer.wait_time = randi_range(0.5, 2.5)
 			timer.start()
+			wait = true
 			timergoing = true
-		if wait == false:
-			randomPos = randi_range(1,9)
-			print(randomPos)
+		if wait == false and not $Turn/Label.text == "Draw" or not $Turn/Label.text == "You won!" or not $Turn/Label.text == "You lost :(":
+			var win_move = get_winning_move()
+			var block_move = get_block_move()
+	
+			if win_move != -1:
+				randomPos = win_move
+			elif block_move != -1:
+				randomPos = block_move
+			else:
+				randomPos = randi_range(1,9)
 			if used.has(randomPos):
 				print("used already :(")
-				return
+				if finished == false:
+					return
 			else:
-				
 				if randomPos == 1:
 					var o1 = o.duplicate()
 					_1.add_child(o1)
@@ -131,24 +175,27 @@ func _process(delta: float) -> void:
 					enemyUsed += [9]
 				playerTurn = true
 				timergoing = false
-				wait = true
+				wait = false
 	for combo in winning:
 		if combo.all(func(n): return n in playerUsed):
-			if not turnLabel.text == "You won!":
+			if finished == false:
 				turnLabel.text = "You won!"
+				playerTurn = true
 				win.emit()
 				$Turn2.visible = true
 				$Turn2.position = Vector2(744, 300)
-
-
+				finished = true
+				
 	for combo in winning:
 		if combo.all(func(n): return n in enemyUsed):
 			if not turnLabel.text == "You won!":
-				if not turnLabel.text == "You lost :(":
+				if finished == false:
 					turnLabel.text = "You lost :("
 					lost.emit()
+					playerTurn = true
 					$Turn2.visible = true
 					$Turn2.position = Vector2(744, 300)
+					finished = true
 func removeAllDubs() -> void:
 	if _1.get_child_count() >=  0.9:
 		if not 1 in used:

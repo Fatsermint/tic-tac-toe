@@ -6,10 +6,10 @@ const backround1 = preload("uid://c6c660x2uyaet")
 const backround2 = preload("uid://bxcoh27sefsv2")
 const backround3 = preload("uid://duob4oylnimi6")
 const backround4 = preload("uid://b0j50rxrtulyk")
-
+static var draws = 0
 static var wins = 0
 static var losts = 0
-static var played = 0
+var played
 @onready var backround: TextureRect = $"../TextureRect"
 
 @onready var settings: ColorRect = $"../ColorRect"
@@ -31,7 +31,7 @@ func _on_settings_open_button_pressed() -> void:
 		settings.visible = false
 	else:
 		open = true
-		played = wins + losts
+		played = wins + losts + draws
 		settings.visible = true
 		$"../ColorRect/Played".text = "Games played " + str(played)
 		$"../ColorRect/Win".text = "Games won " + str(wins)
@@ -49,3 +49,7 @@ func _on_control_lost() -> void:
 
 func _on_control_win() -> void:
 	wins += 1
+
+
+func _on_control_drawed() -> void:
+	draws += 1

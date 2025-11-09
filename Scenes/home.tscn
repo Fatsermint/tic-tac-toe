@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b0b3535a8dvu8"]
+[gd_scene load_steps=17 format=3 uid="uid://b0b3535a8dvu8"]
 
 [ext_resource type="Script" uid="uid://b022qqr1k6igs" path="res://Scenes/home.gd" id="1_12ycv"]
 [ext_resource type="PackedScene" uid="uid://pb0qjsqdhndb" path="res://Scenes/grid.tscn" id="1_uq2cn"]
@@ -9,6 +9,8 @@
 [ext_resource type="FontFile" uid="uid://b2lkvxapehayl" path="res://images/Lacquer-Regular.ttf" id="7_vkfas"]
 [ext_resource type="Texture2D" uid="uid://ba4cxyxaui3hl" path="res://images/settings.png" id="8_q1yq7"]
 [ext_resource type="Script" uid="uid://c08luf1n2rprl" path="res://Scenes/settings.gd" id="9_cykap"]
+[ext_resource type="AudioStream" uid="uid://ddh46yx8koicd" path="res://sounds/backroundmusic.mp3" id="10_8riyq"]
+[ext_resource type="AudioStream" uid="uid://d77d2354558" path="res://sounds/pop.mp3" id="11_gyiet"]
 
 [sub_resource type="Animation" id="Animation_12ycv"]
 resource_name = "Idle"
@@ -200,8 +202,8 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -424.0
-offset_right = -384.0
+offset_left = -424.00006
+offset_right = -384.00006
 offset_bottom = 40.000015
 grow_horizontal = 0
 scale = Vector2(10.6, 3.5199995)
@@ -286,10 +288,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -284.5
-offset_top = -274.5
-offset_right = 284.5
-offset_bottom = 274.5
+offset_left = -287.0
+offset_top = -277.0
+offset_right = 282.0
+offset_bottom = 272.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.92790747, 0.92790747)
@@ -378,6 +380,14 @@ theme_override_fonts/font = ExtResource("7_vkfas")
 theme_override_font_sizes/font_size = 50
 text = "Change backround"
 
+[node name="Backround" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_8riyq")
+autoplay = true
+
+[node name="Pop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_gyiet")
+
+[connection signal="drawed" from="." to="Settings" method="_on_control_drawed"]
 [connection signal="lost" from="." to="Settings" method="_on_control_lost"]
 [connection signal="win" from="." to="Settings" method="_on_control_win"]
 [connection signal="mouse_entered" from="Grid/2" to="." method="_on_2_mouse_entered"]
