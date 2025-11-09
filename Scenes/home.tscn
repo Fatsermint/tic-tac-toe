@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b0b3535a8dvu8"]
+[gd_scene load_steps=19 format=3 uid="uid://b0b3535a8dvu8"]
 
 [ext_resource type="Script" uid="uid://b022qqr1k6igs" path="res://Scenes/home.gd" id="1_12ycv"]
 [ext_resource type="PackedScene" uid="uid://pb0qjsqdhndb" path="res://Scenes/grid.tscn" id="1_uq2cn"]
@@ -10,7 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://ba4cxyxaui3hl" path="res://images/settings.png" id="8_q1yq7"]
 [ext_resource type="Script" uid="uid://c08luf1n2rprl" path="res://Scenes/settings.gd" id="9_cykap"]
 [ext_resource type="AudioStream" uid="uid://ddh46yx8koicd" path="res://sounds/backroundmusic.mp3" id="10_8riyq"]
+[ext_resource type="FontFile" uid="uid://xrwm4p1m8g83" path="res://images/CaveatBrush-Regular.ttf" id="10_gyiet"]
 [ext_resource type="AudioStream" uid="uid://d77d2354558" path="res://sounds/pop.mp3" id="11_gyiet"]
+[ext_resource type="Texture2D" uid="uid://qeo82fxaiq1o" path="res://images/line-removebg-preview.png" id="13_jjai4"]
 
 [sub_resource type="Animation" id="Animation_12ycv"]
 resource_name = "Idle"
@@ -211,8 +213,8 @@ color = Color(0.32799995, 0.27999997, 1, 0.4745098)
 
 [node name="Label" type="Label" parent="Turn"]
 layout_mode = 0
-offset_left = 0.28301883
-offset_right = 556.2831
+offset_left = 0.09433958
+offset_right = 556.0944
 offset_bottom = 138.0
 scale = Vector2(0.07169813, 0.28671333)
 theme_override_fonts/font = ExtResource("7_vkfas")
@@ -223,11 +225,18 @@ vertical_alignment = 1
 
 [node name="Turn2" type="ColorRect" parent="."]
 visible = false
-layout_mode = 0
-offset_left = 744.0
-offset_top = 45.0
-offset_right = 774.0
-offset_bottom = 75.0
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -408.0
+offset_top = -279.0
+offset_right = -378.0
+offset_bottom = -249.0
+grow_horizontal = 0
+grow_vertical = 2
 scale = Vector2(10.6, 3.5199995)
 color = Color(0.32799995, 0.27999997, 1, 0.4745098)
 
@@ -263,6 +272,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="Settings" type="TextureRect" parent="."]
+visible = false
 top_level = true
 layout_mode = 0
 offset_right = 512.0
@@ -281,21 +291,20 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -287.0
-offset_top = -277.0
-offset_right = 282.0
-offset_bottom = 272.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.92790747, 0.92790747)
-color = Color(0, 0.92314893, 1, 0.984)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -358.00006
+offset_top = -340.0
+offset_right = 211.0
+offset_bottom = 209.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.57739824, 0.5866802)
+color = Color(0, 0.9166665, 1, 0.47058824)
 
 [node name="Head" type="Label" parent="ColorRect"]
 layout_mode = 1
@@ -306,7 +315,7 @@ offset_left = -197.5
 offset_right = 197.5
 offset_bottom = 192.0
 grow_horizontal = 2
-theme_override_fonts/font = ExtResource("7_vkfas")
+theme_override_fonts/font = ExtResource("10_gyiet")
 theme_override_font_sizes/font_size = 160
 text = "STATS"
 
@@ -316,7 +325,7 @@ offset_left = 14.548863
 offset_top = 170.81445
 offset_right = 632.5489
 offset_bottom = 230.81445
-theme_override_fonts/font = ExtResource("7_vkfas")
+theme_override_fonts/font = ExtResource("10_gyiet")
 theme_override_font_sizes/font_size = 50
 text = "Games played "
 
@@ -326,7 +335,7 @@ offset_left = 14.548863
 offset_top = 238.70915
 offset_right = 632.5489
 offset_bottom = 298.70917
-theme_override_fonts/font = ExtResource("7_vkfas")
+theme_override_fonts/font = ExtResource("10_gyiet")
 theme_override_font_sizes/font_size = 50
 text = "Games won"
 
@@ -336,9 +345,9 @@ offset_left = 14.548863
 offset_top = 311.9923
 offset_right = 632.5489
 offset_bottom = 371.9923
-theme_override_fonts/font = ExtResource("7_vkfas")
+theme_override_fonts/font = ExtResource("10_gyiet")
 theme_override_font_sizes/font_size = 50
-text = "Games losT"
+text = "Games lost"
 
 [node name="ColorRect" type="ColorRect" parent="ColorRect"]
 layout_mode = 1
@@ -355,7 +364,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(9.928, 3.5)
 mouse_filter = 1
-color = Color(0.37804863, 0.37804863, 0.37804863, 0.80700004)
+color = Color(0.54, 0.54, 0.54, 0.50980395)
 
 [node name="Button" type="Button" parent="ColorRect/ColorRect"]
 self_modulate = Color(1, 1, 1, 0)
@@ -370,11 +379,11 @@ mouse_filter = 1
 [node name="Change" type="Label" parent="ColorRect/ColorRect"]
 top_level = true
 layout_mode = 0
-offset_left = 392.0
-offset_top = 446.0
-offset_right = 1010.0
-offset_bottom = 506.0
-scale = Vector2(0.72, 1)
+offset_left = 845.0
+offset_top = 556.0
+offset_right = 1463.0
+offset_bottom = 616.0
+scale = Vector2(0.5, 0.694)
 theme_override_colors/font_color = Color(1, 1, 0.45775273, 1)
 theme_override_fonts/font = ExtResource("7_vkfas")
 theme_override_font_sizes/font_size = 50
@@ -386,6 +395,18 @@ autoplay = true
 
 [node name="Pop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_gyiet")
+
+[node name="Line" type="TextureRect" parent="."]
+visible = false
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 280.0
+offset_top = -337.0
+offset_right = 857.0
+offset_bottom = 96.0
+rotation = 0.7853982
+scale = Vector2(1.7, 2)
+texture = ExtResource("13_jjai4")
 
 [connection signal="drawed" from="." to="Settings" method="_on_control_drawed"]
 [connection signal="lost" from="." to="Settings" method="_on_control_lost"]

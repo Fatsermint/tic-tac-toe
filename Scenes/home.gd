@@ -22,11 +22,13 @@ signal lost
 signal drawed
 var finished = false
 var playerTurn = true
+var waitTime = 1
 var used = []
 var playerUsed = []
 var enemyUsed = []
 var wait = true
 var timergoing = false
+var bug = false
 var dub1
 var dub2
 var dub3
@@ -78,25 +80,27 @@ func _process(delta: float) -> void:
 			print("DRAW")										#DRAW
 			finished = true
 			label.text = "Draw"
-			
 			drawed.emit()
 			playerTurn = true
-
 			$Turn2.visible = true
-			$Turn2.position = Vector2(744, 300)
+			$Turn2.position = Vector2(777, 167)
 	if playerTurn == true and finished == false:
 		turnLabel.text = "Your Turn" # Tells turn
 	else:
 		if finished == false:
 			turnLabel.text = "Wait.."
 	if playerTurn == false:
-		if timergoing == false:
+		if timergoing == false and bug == true:
 			pop.play()
-			timer.wait_time = randi_range(0.5, 2.5)
+			waitTime = randi_range(0.5,2)
+			timer.wait_time = waitTime
 			timer.start()
 			wait = true
+			print("timer started")
 			timergoing = true
-		if wait == false and not $Turn/Label.text == "Draw" or not $Turn/Label.text == "You won!" or not $Turn/Label.text == "You lost :(":
+			bug = false
+		if wait == false and finished == false:
+			print("placing")
 			var win_move = get_winning_move()
 			var block_move = get_block_move()
 	
@@ -176,6 +180,7 @@ func _process(delta: float) -> void:
 				playerTurn = true
 				timergoing = false
 				wait = false
+				
 	for combo in winning:
 		if combo.all(func(n): return n in playerUsed):
 			if finished == false:
@@ -183,9 +188,8 @@ func _process(delta: float) -> void:
 				playerTurn = true
 				win.emit()
 				$Turn2.visible = true
-				$Turn2.position = Vector2(744, 300)
+				$Turn2.position = Vector2(777, 167)
 				finished = true
-				
 	for combo in winning:
 		if combo.all(func(n): return n in enemyUsed):
 			if not turnLabel.text == "You won!":
@@ -194,8 +198,18 @@ func _process(delta: float) -> void:
 					lost.emit()
 					playerTurn = true
 					$Turn2.visible = true
-					$Turn2.position = Vector2(744, 300)
+					$Turn2.position = Vector2(777, 167)
 					finished = true
+				if playerUsed.has[1 and 2 and 3]:
+					print("1")
+				if playerUsed.has[4 and 5 and 6]:
+					print("2")
+				if playerUsed.has[7 and 8 and 9]:
+					print("3")
+				if playerUsed.has[1 and 4 and 7]:
+					print("4")
+				if playerUsed.has[2 and 5 and 8]:
+					print("5")
 func removeAllDubs() -> void:
 	if _1.get_child_count() >=  0.9:
 		if not 1 in used:
@@ -306,6 +320,8 @@ func _on_1_pressed() -> void:
 			playerUsed += [1]
 			dub1.modulate = colorPlayer
 			playerTurn = false
+			bug = true
+			
 func _on_2_pressed() -> void:
 	if not 2 in used:
 		if playerTurn == true:
@@ -313,6 +329,8 @@ func _on_2_pressed() -> void:
 			playerUsed += [2]
 			dub2.modulate = colorPlayer
 			playerTurn = false
+			bug = true
+			
 func _on_3_pressed() -> void:
 	if not 3 in used:
 		if playerTurn == true:
@@ -320,6 +338,8 @@ func _on_3_pressed() -> void:
 			playerUsed += [3]
 			dub3.modulate = colorPlayer
 			playerTurn = false
+			bug = true
+			
 func _on_4_pressed() -> void:
 	if not 4 in used:
 		if playerTurn == true:
@@ -327,6 +347,8 @@ func _on_4_pressed() -> void:
 			playerUsed += [4]
 			dub4.modulate = colorPlayer
 			playerTurn = false
+			bug = true
+			
 func _on_5_pressed() -> void:
 	if not 5 in used:
 		if playerTurn == true:
@@ -334,6 +356,8 @@ func _on_5_pressed() -> void:
 			playerUsed += [5]
 			dub5.modulate = colorPlayer
 			playerTurn = false
+			bug = true
+			
 func _on_6_pressed() -> void:
 	if not 6 in used:
 		if playerTurn == true:
@@ -341,6 +365,8 @@ func _on_6_pressed() -> void:
 			playerUsed += [6]
 			dub6.modulate = colorPlayer
 			playerTurn = false
+			bug = true
+			
 func _on_7_pressed() -> void:
 	if not 7 in used:
 		if playerTurn == true:
@@ -348,6 +374,8 @@ func _on_7_pressed() -> void:
 			used += [7]
 			dub7.modulate = colorPlayer
 			playerTurn = false
+			bug = true
+			
 func _on_8_pressed() -> void:
 	if not 8 in used:
 		if playerTurn == true:
@@ -355,6 +383,8 @@ func _on_8_pressed() -> void:
 			playerUsed += [8]
 			dub8.modulate = colorPlayer
 			playerTurn = false
+			bug = true
+
 func _on_9_pressed() -> void:
 	if not 9 in used:
 		if playerTurn == true:
@@ -362,11 +392,11 @@ func _on_9_pressed() -> void:
 			playerUsed += [9]
 			dub9.modulate = colorPlayer
 			playerTurn = false
+			bug = true
 
 func _on_timer_timeout() -> void:
 	wait = false
 	timergoing = false
-
-
+	bug = false
 func _on_restart_button_pressed() -> void:
 	get_tree().reload_current_scene()

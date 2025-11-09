@@ -16,6 +16,8 @@ var played
 
 var open = false
 var currentBg = 1
+func _ready() -> void:
+	_on_settings_open_button_pressed()
 func _process(delta: float) -> void:
 	if currentBg == 1:
 		backround.texture = backround1
@@ -26,16 +28,13 @@ func _process(delta: float) -> void:
 	if currentBg == 4:
 		backround.texture = backround4
 func _on_settings_open_button_pressed() -> void:
-	if open == true:
-		open = false
-		settings.visible = false
-	else:
-		open = true
-		played = wins + losts + draws
-		settings.visible = true
-		$"../ColorRect/Played".text = "Games played " + str(played)
-		$"../ColorRect/Win".text = "Games won " + str(wins)
-		$"../ColorRect/Lost".text = "Games losT " + str(losts) 
+
+	open = true
+	played = wins + losts + draws
+	settings.visible = true
+	$"../ColorRect/Played".text = "Games played " + str(played)
+	$"../ColorRect/Win".text = "Games won " + str(wins)
+	$"../ColorRect/Lost".text = "Games lost " + str(losts) 
 
 func _on_backround_button_pressed() -> void:
 	currentBg += 1
@@ -45,11 +44,13 @@ func _on_backround_button_pressed() -> void:
 
 func _on_control_lost() -> void:
 	losts += 1
-
+	_on_settings_open_button_pressed()
 
 func _on_control_win() -> void:
 	wins += 1
+	_on_settings_open_button_pressed()
 
 
 func _on_control_drawed() -> void:
 	draws += 1
+	_on_settings_open_button_pressed()
