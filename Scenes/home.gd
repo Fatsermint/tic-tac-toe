@@ -200,16 +200,6 @@ func _process(delta: float) -> void:
 					$Turn2.visible = true
 					$Turn2.position = Vector2(777, 167)
 					finished = true
-				if playerUsed.has[1 and 2 and 3]:
-					print("1")
-				if playerUsed.has[4 and 5 and 6]:
-					print("2")
-				if playerUsed.has[7 and 8 and 9]:
-					print("3")
-				if playerUsed.has[1 and 4 and 7]:
-					print("4")
-				if playerUsed.has[2 and 5 and 8]:
-					print("5")
 func removeAllDubs() -> void:
 	if _1.get_child_count() >=  0.9:
 		if not 1 in used:

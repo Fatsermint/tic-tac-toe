@@ -12,7 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://ddh46yx8koicd" path="res://sounds/backroundmusic.mp3" id="10_8riyq"]
 [ext_resource type="FontFile" uid="uid://xrwm4p1m8g83" path="res://images/CaveatBrush-Regular.ttf" id="10_gyiet"]
 [ext_resource type="AudioStream" uid="uid://d77d2354558" path="res://sounds/pop.mp3" id="11_gyiet"]
-[ext_resource type="Texture2D" uid="uid://qeo82fxaiq1o" path="res://images/line-removebg-preview.png" id="13_jjai4"]
+[ext_resource type="Script" uid="uid://cf6cxgbei1pvt" path="res://Scenes/changesymbols.gd" id="13_jjai4"]
 
 [sub_resource type="Animation" id="Animation_12ycv"]
 resource_name = "Idle"
@@ -173,7 +173,7 @@ offset_left = -1586.0
 offset_top = 45.0
 offset_right = -1586.0
 offset_bottom = 45.0
-scale = Vector2(0.04, 0.04)
+scale = Vector2(0.03, 0.03)
 mouse_filter = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="X"]
@@ -196,7 +196,7 @@ offset_left = -2480.0
 offset_top = 401.0
 offset_right = -2480.0
 offset_bottom = 401.0
-scale = Vector2(0.07, 0.07)
+scale = Vector2(0.05, 0.05)
 mouse_filter = 2
 
 [node name="Turn" type="ColorRect" parent="."]
@@ -356,13 +356,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -213.91106
-offset_top = 114.008575
-offset_right = -173.91106
-offset_bottom = 154.00858
+offset_left = -268.91272
+offset_top = 117.53641
+offset_right = -228.91273
+offset_bottom = 157.5364
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(9.928, 3.5)
+scale = Vector2(5.909985, 3.5)
 mouse_filter = 1
 color = Color(0.54, 0.54, 0.54, 0.50980395)
 
@@ -374,20 +374,64 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.0125229, 0.9956455)
 mouse_filter = 1
 
 [node name="Change" type="Label" parent="ColorRect/ColorRect"]
 top_level = true
 layout_mode = 0
-offset_left = 845.0
-offset_top = 556.0
-offset_right = 1463.0
-offset_bottom = 616.0
+offset_left = 814.0
+offset_top = 540.0
+offset_right = 1432.0
+offset_bottom = 663.0
 scale = Vector2(0.5, 0.694)
 theme_override_colors/font_color = Color(1, 1, 0.45775273, 1)
 theme_override_fonts/font = ExtResource("7_vkfas")
 theme_override_font_sizes/font_size = 50
-text = "Change backround"
+text = "Change 
+backround"
+
+[node name="ColorRect2" type="ColorRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 9.924255
+offset_top = 119.240906
+offset_right = 49.924225
+offset_bottom = 159.2409
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(5.909985, 3.5)
+mouse_filter = 1
+color = Color(0.54, 0.54, 0.54, 0.50980395)
+
+[node name="Button" type="Button" parent="ColorRect/ColorRect2"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.0125229, 0.9956455)
+mouse_filter = 1
+
+[node name="Change" type="Label" parent="ColorRect/ColorRect2"]
+top_level = true
+layout_mode = 0
+offset_left = 974.0
+offset_top = 535.0
+offset_right = 1592.0
+offset_bottom = 658.0
+scale = Vector2(0.5, 0.694)
+theme_override_colors/font_color = Color(1, 1, 0.45775273, 1)
+theme_override_fonts/font = ExtResource("7_vkfas")
+theme_override_font_sizes/font_size = 50
+text = "Change 
+symbol"
 
 [node name="Backround" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_8riyq")
@@ -396,17 +440,135 @@ autoplay = true
 [node name="Pop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_gyiet")
 
-[node name="Line" type="TextureRect" parent="."]
+[node name="ColorRect2" type="ColorRect" parent="."]
 visible = false
-modulate = Color(0, 0, 0, 1)
 layout_mode = 0
-offset_left = 280.0
-offset_top = -337.0
-offset_right = 857.0
-offset_bottom = 96.0
-rotation = 0.7853982
-scale = Vector2(1.7, 2)
-texture = ExtResource("13_jjai4")
+offset_left = 362.0
+offset_top = 206.0
+offset_right = 402.0
+offset_bottom = 246.0
+scale = Vector2(10.600001, 10.199998)
+color = Color(0, 0.91764706, 1, 0.47058824)
+script = ExtResource("13_jjai4")
+
+[node name="ColorRect3" type="ColorRect" parent="ColorRect2"]
+layout_mode = 0
+offset_left = 0.75471497
+offset_top = 26.372553
+offset_right = 40.754715
+offset_bottom = 66.37255
+scale = Vector2(0.47058833, 0.32941163)
+color = Color(0, 0.91764706, 1, 0.47058824)
+
+[node name="Button" type="Button" parent="ColorRect2/ColorRect3"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 78.0
+offset_bottom = 84.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3416678, 0.3183499)
+theme_override_fonts/font = ExtResource("10_gyiet")
+theme_override_font_sizes/font_size = 91
+text = "I C"
+
+[node name="ColorRect4" type="ColorRect" parent="ColorRect2"]
+layout_mode = 0
+offset_left = 20.094334
+offset_top = 12.254904
+offset_right = 60.094334
+offset_bottom = 52.254906
+scale = Vector2(0.47058833, 0.32941163)
+color = Color(0, 0.91764706, 1, 0.47058824)
+
+[node name="Button" type="Button" parent="ColorRect2/ColorRect4"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 78.0
+offset_bottom = 84.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3416678, 0.3183499)
+theme_override_fonts/font = ExtResource("10_gyiet")
+theme_override_font_sizes/font_size = 91
+text = "A B"
+
+[node name="ColorRect5" type="ColorRect" parent="ColorRect2"]
+layout_mode = 0
+offset_left = 0.9433937
+offset_top = 12.254908
+offset_right = 40.943394
+offset_bottom = 52.254906
+scale = Vector2(0.47058833, 0.32941163)
+color = Color(0, 0.91764706, 1, 0.47058824)
+
+[node name="Button" type="Button" parent="ColorRect2/ColorRect5"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 78.0
+offset_bottom = 84.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3416678, 0.3183499)
+theme_override_fonts/font = ExtResource("10_gyiet")
+theme_override_font_sizes/font_size = 91
+text = "X O"
+
+[node name="ColorRect6" type="ColorRect" parent="ColorRect2"]
+layout_mode = 0
+offset_left = 19.622639
+offset_top = 25.980398
+offset_right = 59.62264
+offset_bottom = 65.9804
+scale = Vector2(0.47058833, 0.32941163)
+color = Color(0, 0.91764706, 1, 0.47058824)
+
+[node name="Button" type="Button" parent="ColorRect2/ColorRect6"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 78.0
+offset_bottom = 84.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3416678, 0.3183499)
+theme_override_fonts/font = ExtResource("10_gyiet")
+theme_override_font_sizes/font_size = 91
+text = "1 2"
+
+[node name="Button" type="Button" parent="ColorRect2"]
+layout_mode = 0
+offset_left = 34.056595
+offset_top = 0.9803923
+offset_right = 58.056595
+offset_bottom = 49.980392
+scale = Vector2(0.2, 0.12)
+theme_override_fonts/font = ExtResource("10_gyiet")
+theme_override_font_sizes/font_size = 32
+text = "X"
+
+[node name="Label" type="Label" parent="ColorRect2"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 1.8867923
+offset_top = 0.19607846
+offset_right = 680.8868
+offset_bottom = 152.19608
+scale = Vector2(0.04396721, 0.0707772)
+theme_override_fonts/font = ExtResource("10_gyiet")
+theme_override_font_sizes/font_size = 120
+text = "Choose symbols"
 
 [connection signal="drawed" from="." to="Settings" method="_on_control_drawed"]
 [connection signal="lost" from="." to="Settings" method="_on_control_lost"]
@@ -434,3 +596,17 @@ texture = ExtResource("13_jjai4")
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Settings/Button" to="Settings" method="_on_settings_open_button_pressed"]
 [connection signal="pressed" from="ColorRect/ColorRect/Button" to="Settings" method="_on_backround_button_pressed"]
+[connection signal="pressed" from="ColorRect/ColorRect2/Button" to="ColorRect2" method="_on_open_button_pressed"]
+[connection signal="oto2" from="ColorRect2" to="O" method="_on_color_rect_2_oto_2"]
+[connection signal="otoB" from="ColorRect2" to="O" method="_on_color_rect_2_oto_b"]
+[connection signal="otoC" from="ColorRect2" to="O" method="_on_color_rect_2_oto_c"]
+[connection signal="otoO" from="ColorRect2" to="O" method="_on_color_rect_2_oto_o"]
+[connection signal="xto1" from="ColorRect2" to="X" method="_on_color_rect_2_xto_1"]
+[connection signal="xtoA" from="ColorRect2" to="X" method="_on_color_rect_2_xto_a"]
+[connection signal="xtoI" from="ColorRect2" to="X" method="_on_color_rect_2_xto_i"]
+[connection signal="xtoX" from="ColorRect2" to="X" method="_on_color_rect_2_xto_x"]
+[connection signal="pressed" from="ColorRect2/ColorRect3/Button" to="ColorRect2" method="_on_IC_button_pressed"]
+[connection signal="pressed" from="ColorRect2/ColorRect4/Button" to="ColorRect2" method="_on_AB_button_pressed"]
+[connection signal="pressed" from="ColorRect2/ColorRect5/Button" to="ColorRect2" method="_on_XO_button_pressed"]
+[connection signal="pressed" from="ColorRect2/ColorRect6/Button" to="ColorRect2" method="_on_12_button_pressed"]
+[connection signal="pressed" from="ColorRect2/Button" to="ColorRect2" method="_on_exit_button_pressed"]
