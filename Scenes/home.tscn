@@ -423,11 +423,18 @@ mouse_filter = 1
 
 [node name="Change" type="Label" parent="ColorRect/ColorRect"]
 top_level = true
-layout_mode = 0
-offset_left = 814.0
-offset_top = 540.0
-offset_right = 1432.0
-offset_bottom = 663.0
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -338.0
+offset_top = -114.0
+offset_right = -29.0
+offset_bottom = 9.0
+grow_horizontal = 0
+grow_vertical = 0
 scale = Vector2(0.5, 0.694)
 theme_override_colors/font_color = Color(1, 1, 0.45775273, 1)
 theme_override_fonts/font = ExtResource("7_vkfas")
@@ -465,11 +472,18 @@ mouse_filter = 1
 
 [node name="Change" type="Label" parent="ColorRect/ColorRect2"]
 top_level = true
-layout_mode = 0
-offset_left = 974.0
-offset_top = 535.0
-offset_right = 1592.0
-offset_bottom = 658.0
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -110.0
+offset_right = 129.0
+offset_bottom = 13.0
+grow_horizontal = 0
+grow_vertical = 0
 scale = Vector2(0.5, 0.694)
 theme_override_colors/font_color = Color(1, 1, 0.45775273, 1)
 theme_override_fonts/font = ExtResource("7_vkfas")
